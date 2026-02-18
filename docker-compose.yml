@@ -8,6 +8,7 @@ services:
 
   backend:
     build: ./backend
+    image: gajendra1/backend-jenkins-test:latest
     ports:
       - "5000:5000"
     depends_on:
@@ -15,6 +16,7 @@ services:
 
   frontend:
     build: ./frontend
+    image: gajendra1/frontend-jenkins-test:latest
     ports:
       - "3000:3000"
     depends_on:
