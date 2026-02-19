@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DevOps App</title>
+</head>
+<body>
+
+<h2>Add User</h2>
+
+<input type="text" id="name" placeholder="Enter Name"><br><br>
+<input type="text" id="role" placeholder="Enter Role"><br><br>
+
+<button onclick="addData()">Add Data</button>
+
+<h2>Users Data</h2>
+<button onclick="getData()">Fetch Data</button>
+
+<ul id="list"></ul>
+
+<script>
+async function addData(){
+  let name = document.getElementById("name").value;
+  let role = document.getElementById("role").value;
+
+  await fetch("/add", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({name, role})
+  });
+
+  alert("Data Added");
+}
+
+async function getData(){
+  let res = await fetch("/get");
+  let data = await res.json();
+
+  let list = document.getElementById("list");
+  list.innerHTML="";
+
+  data.forEach(user=>{
+    let li = document.createElement("li");
+    li.innerText = user.name + " - " + user.role;
+    list.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

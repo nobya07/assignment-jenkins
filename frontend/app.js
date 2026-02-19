@@ -1,8 +1,9 @@
 const express = require("express");
 const axios = require("axios");
-const app = express();
 
+const app = express();
 app.use(express.json());
+app.use(express.static(__dirname));
 
 app.post("/add", async (req, res) => {
   await axios.post("http://backend:5000/add", req.body);
